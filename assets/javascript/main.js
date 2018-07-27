@@ -30,6 +30,7 @@ var config = {
 var name = "";
 var destination = "";
 var firstTime = "";
+// ****
 var frequency = "";
 var currentTime = 0;
 var index = 0;
@@ -47,7 +48,7 @@ var update = function (){
 $(document).ready(function(){
     datetime = $("#current-time")
     update();
-    setInterval(update, 500);
+    setInterval(update, 1000);
 });
 
 
@@ -116,12 +117,12 @@ database.ref().orderByChild("dateAdded").limitToLast(20).on("child_added", funct
 
     // change the html with data from database
     $("#trainList").append("<tr><td>" + snapshot.val().name + "</td>" +
-"<td>" + snapshot.val().destination + "</td>" +
-"<td>" + snapshot.val().frequency + "</td>" +
-"<td>" + snapshot.val().nextArrival + "</td>" +
-"<td>" + snapshot.val(). minutesAway + "</td></tr>");
+    "<td>" + snapshot.val().destination + "</td>" +
+    "<td>" + snapshot.val().frequency + "</td>" +
+    "<td>" + snapshot.val().nextArrival + "</td>" +
+    "<td>" + snapshot.val(). minutesAway + "</td></tr>");
 
-index++;
+    index++;
 
 }, function(errorObject) {
     console.log("Errors handled: " + errorObject.code);
