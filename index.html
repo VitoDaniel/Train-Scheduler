@@ -6,7 +6,7 @@
     <title>Train-Scheduler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Adding Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
     <!-- linking reset css -->
     <link rel="stylesheet" type="text/css"  href="./assets/css/reset.css" />
     <!-- Bootstrap CSS CDN -->
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- add animate CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <!-- Mask Plugin
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script> -->
     <!-- style css -->
     <link rel="stylesheet" type="text/css"  href="./assets/css/style.css" />
     
@@ -26,20 +28,17 @@
         <!-- jumbotron holding title. -->
         <div class="jumbotron" style="background-color: green; color: black">
             <h1 class="text-center">
-                <strong>
-                        <i class="fas fa-train"></i> Train Scheduler <i class="fas fa-calendar-alt"></i>
-                </strong>
-                
+                <strong>Train Scheduler</strong>
             </h1>
         </div>
 
-        <div class="row col-lg-12">
-            <h5><span id="current-time"></span></h5>
+        <div class="row col-lg-12 col-sm-12">
+            <h5 class="text-center"> <i class="far fa-clock"></i>  <span id="current-time"></span></h5>
         </div>
 
         <!-- Row to handle the train schedule that we have created -->
         <div class="row">
-             <div class="col-lg-12">
+             <div class="col-lg-12 col-sm-12">
                  <br>
 
                  <div class="card">
@@ -54,11 +53,11 @@
                          <table class="table table-hover">
                              <thead>
                                  <tr>
-                                     <th scope="col">Train Name</th>
-                                     <th scope="col">Destination</th>
-                                     <th scope="col">Frequency (min)</th>
-                                     <th scope="col">Next Arrival</th>
-                                     <th scope="col">Minutes Away</th>
+                                     <th scope="col"><strong>Train Name</strong></th>
+                                     <th scope="col"><strong>Destination</strong></th>
+                                     <th scope="col"><strong>Frequency (min)</strong></th>
+                                     <th scope="col"><strong>Next Arrival</strong></th>
+                                     <th scope="col"><strong>Minutes Away</strong></th>
                                  </tr>
                              </thead>
                              <tbody id="trainList">
@@ -75,7 +74,7 @@
 
         <!-- Row for adding your train -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-sm-12">
                 <br>
                 <!-- first panel is to handle the search parameters. -->
                 <div class="card">
@@ -104,8 +103,8 @@
 
                             <!-- capturing the first train time -->
                             <div class="form-group">
-                                <label for="firstTrain">First Train Time (HH:mm - military time)</label>
-                                <input type="text" class="form-control" id="FTT">
+                                <label for="firstTrain">First Train Time (military time)</label>
+                                <input type="text" class="form-control" placeholder="HH:MM" id="FTT" required maxlength="5">
                             </div>
 
                             <!-- capturing the Frequency  -->
@@ -127,7 +126,7 @@
 
         <!-- footer -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-sm-12">
 
                 <hr>
                 <h5 class="text-center">
@@ -152,3 +151,8 @@
 
 </body>
 </html>
+
+
+
+<!-- 478px  X 630px-->
+<!-- dates do not update -->
