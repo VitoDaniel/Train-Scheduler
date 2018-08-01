@@ -27,14 +27,9 @@ $(function(){
 
 
     //   initial value as a global var
-    var name        = "";
-    var destination = "";
-    var firstTime   = "";
-    var frequency   = "";
     var currentTime = 0;
     var index       = 0;
-    var nextArrival = "";
-    var minutesAway = "";
+
 
     // // Time form validation with jQuery Mask plugin.
     // var firstTime = $("#FTT").mask("00:00"); 
@@ -62,23 +57,11 @@ $(function(){
     $("#btnSubmit").on("click", function(){
         // don't refresh the page
         event.preventDefault();
-            name = $("#train-name").val().trim(),
-            destination = $("#destination").val().trim(),
-            firstTime = moment($("#FTT").val().trim(), "HH:mm").subtract(1, "years").format("X");
-            frequency = $("#frequency").val().trim()
+            var name = $("#train-name").val().trim();
+            var destination = $("#destination").val().trim();
+            var firstTime = $("#FTT").val().trim();
+            var frequency = $("#frequency").val().trim();
 
-            // first time (pushed back 1 year to make sure it comes before current time)
-            var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-            // difference between the times
-            var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-            // time apart, remidner
-            var tRemainder = diffTime % frequency;
-            // minutes until train
-            var minutesAway = frequency - tRemainder;
-            // next train time:
-            var nextArrival = moment().add(minutesAway, "minutes").format("hh:mm A");
-        
-            
             
             // var nextArrivalUpdate = function(){
             //     date = moment(new Date())
@@ -91,8 +74,8 @@ $(function(){
             destination: destination,
             firstTime: firstTime,
             frequency: frequency,
-            minutesAway: minutesAway,
-            nextArrival: nextArrival,
+            // minutesAway: minutesAway,
+            // nextArrival: nextArrival,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
         // let the user know, train has been added
@@ -105,14 +88,29 @@ $(function(){
     // display last 20 trains
     // database.ref().orderByChild("dateAdded").limitToLast(20).on("child_added", function(snapshot){
     database.ref().on("child_added", function(snapshot){
+        
+        // getting variable from local storage
+        var firstTime = snapshot.val().firstTime;
+        var frequency = snapshot.val().frequency;
+        // first time (pushed back 1 year to make sure it comes before current time)
+        var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+        // difference between the times
+        var diffTime = moment().diff(firstTimeConverted, "minutes");
+        // time apart, remidner
+        var tRemainder = diffTime % frequency;
+        // minutes until train
+        var minutesAway = frequency - tRemainder;
+
+        // next train time:
+        var nextArrival = moment().add(minutesAway, "minutes").format("hh:mm A");
 
         // change the html with data from database
         $("#trainList").append(
             "<tr><td>" + snapshot.val().name + "</td>" +
             "<td>" + snapshot.val().destination + "</td>" +
-            "<td>" + snapshot.val().frequency + "</td>" +
-            "<td>" + snapshot.val().nextArrival + "</td>" +
-            "<td>" + snapshot.val(). minutesAway + "</td></tr>");
+            "<td>" + frequency + "</td>" +
+            "<td>" + nextArrival + "</td>" +
+            "<td>" + minutesAway + "</td></tr>");
 
         index++;
         console.log("INDEX: " + index);
